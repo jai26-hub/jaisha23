@@ -1,0 +1,95 @@
+<div>Register</div>
+  
+  
+  <div class="ion-padding">
+  
+    <h1>Create Account,</h1>
+    <h3>Sign up to get started!</h3>
+    <form [formGroup]="regForm" (ngSubmit)="onSubmit()" novalidate>
+
+    <!-- --name -->
+ 
+      <input label="Full Name" placeholder="Name"
+      formControlName="name" type="text"  ngDefaultControl /> 
+     
+      <span class="error ion-padding" *ngIf="submitted && errorCtr.name.errors?.required">
+        Name is required.
+      </span>
+      <span class="error ion-padding" *ngIf="submitted && errorCtr.name.errors?.minlength">
+        Min 4 chars long.  
+      </span>
+      <!-- <email -->
+      <input label="Email ID" placeholder="Email" type="email"  formControlName="email"
+       ngDefaultControl  />
+      
+       <span class="error" *ngIf="submitted && errorCtr.email.errors?.required">
+        Email is required.
+      </span>
+      <span class="error" *ngIf="submitted && errorCtr.email.errors?.pattern">
+        Enter valid email.
+      </span>
+    
+      <input label="Password" placeholder="Password" type="password" ngDefaultControl formControlName="password" />
+      <span class="error" *ngIf="submitted && errorCtr.password.errors?.required">
+        Password is required.
+      </span>
+      <span class="error" *ngIf="submitted && errorCtr.password.errors?.minlength">
+       Password should minimum 8 chars long.
+      </span>
+       <!-- phone -->
+       <input label="Phone" 
+       formControlName="phone" placeholder="Phone" type="numeric" ngDefaultControl />
+       <span class="error ion-padding" *ngIf="submitted && errorCtr.phone.errors?.required">
+         phone is required.
+       </span>
+      <!--  Type -->
+      <div style="text-align: justify;margin-left: 10px;">
+        <h6 style="font-weight: 600;">Gender</h6>
+        <div>
+  
+          <div style="margin-top: 10px;">
+            <label   style="margin-left: 5px;" class="custom-control-label">
+              <input (change)='check($event)'  [(ngModel)]="type" type="radio" value="Male"  name ="type" formControlName="type"
+              >
+              Male </label>
+            
+          <div style="margin-top: 5px;padding-bottom: 15px;">
+          
+            <label style="margin-left: 5px;"  >
+              <input (change)='check($event)' [(ngModel)]="type" type="radio"  value="Female" name="type"formControlName="type"
+                >
+         Female</label>
+          </div>
+     
+  
+          <div formGroupName="address" >
+            <input type="text" formControlName="street" placeholder="street"/>
+            <input type="text" formControlName="city" placeholder="city"/>
+            <input type="text" formControlName="state" placeholder="state"/>
+            <!-- <input type="numeric" formControlName="pincode" placeholder="pincode"/> -->
+           </div>
+        
+
+       <div class="mb-3">
+        <select class="custom-select"  formControlName="servicename">
+          <option value="">Choose your Degree</option>
+          <option *ngFor="let service of Service" [ngValue]="service">{{service}}</option>
+        </select>
+        
+        <div class="error" *ngIf="submitted && errorCtr.servicename.errors?.required">
+          <sup>*</sup>select any degree
+        </div>
+       </div> 
+      
+          </div>
+     </div>
+     </div>
+      
+   
+      <button type="submit" class="button">Register</button>
+      <!-- <input type="button" value="Register" (click)="ngOnInit()"> -->
+
+      </form>
+    <p class="footer-text">I'm already a member, <a routerLink="/login">Sign In</a></p>
+  </div>  
+    
